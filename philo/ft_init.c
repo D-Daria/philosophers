@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 22:06:29 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/22 22:02:53 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:46:47 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int	ft_init_mutexes(t_data *data)
 {
 	if (pthread_mutex_init(&(data->printf_mutex), NULL))
 		return (RTRN_ERROR);
-	if (pthread_mutex_init(&(data->have_eaten_mutex), NULL))
-		return (RTRN_ERROR);
 	if (pthread_mutex_init(&(data->all_dead_mutex), NULL))
 		return (RTRN_ERROR);
-	if (pthread_mutex_init(&(data->check_mutex), NULL))
+	if (pthread_mutex_init(&(data->all_ate_mutex), NULL))
 		return (RTRN_ERROR);
 	return (RTRN_SUCCESS);
 }
@@ -62,11 +60,10 @@ int	ft_init(t_data *data)
 		data->philo[i].done_eating = 0;
 		data->philo[i].left_fork = &(data->forks[i]);
 		data->philo[i].right_fork = &(data->forks[(i + 1) % data->philo_count]);
-		if (pthread_mutex_init(&(data->philo[i].state_mutex), NULL))
+		if (pthread_mutex_init(&(data->philo[i].dead_mutex), NULL))
 			return (RTRN_ERROR);
-		if (pthread_mutex_init(&(data->philo[i].is_dead_mutex), NULL))
+		if (pthread_mutex_init(&(data->philo[i].eat_mutex), NULL))
 			return (RTRN_ERROR);
-		// data->philo[i].is_dead_mutex = &data->all_dead_mutex;
 		data->philo[i].data = data;
 	}
 	return (RTRN_SUCCESS);

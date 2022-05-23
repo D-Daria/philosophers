@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:29:49 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/22 23:21:11 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:11:40 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,14 @@ void	ft_update_eating(t_philo *philo)
 	if (philo->done_eating == 0)
 		philo->eat_count += 1;
 	if (philo->eat_count == philo->data->must_eat)
+	{
+		pthread_mutex_lock(&(philo->eat_mutex));
 		philo->done_eating = 1;
+		pthread_mutex_unlock(&(philo->eat_mutex));
+		return ;
+	}
+	// pthread_mutex_lock(&(philo->eat_mutex));
+	return ;
 }
 
 int	ft_eating(t_philo *philo)
@@ -50,18 +57,23 @@ int	ft_eating(t_philo *philo)
 	ft_check_max_fork(philo, &max_fork, &min_fork);
 	pthread_mutex_lock(&(min_fork->f_mutex));
 	ft_print(philo, TOOK_FORK);
+	if (min_fork->fork_num == max_fork->fork_num)
+	{
+		pthread_mutex_unlock(&(min_fork->f_mutex));
+		return (1);
+	}
 	pthread_mutex_lock(&(max_fork->f_mutex));
 	ft_print(philo, TOOK_FORK);
 	ft_print(philo, EATING_MSG);
-	pthread_mutex_lock(&(philo->state_mutex));
+	pthread_mutex_lock(&(philo->dead_mutex));
 	philo->tm_last_eating = ft_get_time('l');
-	pthread_mutex_unlock(&(philo->state_mutex));
+	pthread_mutex_unlock(&(philo->dead_mutex));
 	ft_usleep(philo->data->time_to_eat);
-	// ft_update_eating(philo);
-	if (philo->done_eating == 0)
-		philo->eat_count += 1;
-	if (philo->eat_count == philo->data->must_eat)
-		philo->done_eating = 1;
+	ft_update_eating(philo);
+	// if (philo->done_eating == 0)
+	// 	philo->eat_count += 1;
+	// if (philo->eat_count == philo->data->must_eat)
+	// 	philo->done_eating = 1;
 	pthread_mutex_unlock(&(max_fork->f_mutex));
 	pthread_mutex_unlock(&(min_fork->f_mutex));
 	return (RTRN_SUCCESS);

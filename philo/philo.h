@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:54:37 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/22 22:48:20 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:44:12 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_data	t_data;
 
 typedef struct s_forks {
 	int		fork_num;
-	t_mutex f_mutex; //init
+	t_mutex f_mutex; // init
 }			t_forks;
 
 typedef struct s_philo {
@@ -61,8 +61,8 @@ typedef struct s_philo {
 	int			done_eating;
 	int			is_dead;
 	long		tm_last_eating;
-	t_mutex		state_mutex; //init
-	t_mutex		is_dead_mutex;//init
+	t_mutex		dead_mutex; //init
+	t_mutex		eat_mutex;//init
 	pthread_t	thread;
 	t_forks		*left_fork;
 	t_forks		*right_fork;
@@ -71,9 +71,10 @@ typedef struct s_philo {
 
 typedef struct s_data {
 	t_mutex		printf_mutex;//initialized
-	t_mutex		have_eaten_mutex; //initialized
 	t_mutex		all_dead_mutex;
-	t_mutex		check_mutex;
+	t_mutex		all_ate_mutex;
+	int			all_dead;
+	int			all_have_eaten;
 	pthread_t	stop_th; // separate thread to check if any of philosophers is dead
 	long		start_time;
 	int			philo_count;
@@ -81,8 +82,6 @@ typedef struct s_data {
 	long		time_to_eat;
 	long		time_to_sleep;
 	int			must_eat;
-	int			all_dead;
-	int			all_done_eating;
 	t_philo		*philo;
 	t_forks		*forks;
 }				t_data;
@@ -123,5 +122,6 @@ int		ft_thinking(t_philo *philo);
 int		ft_join_destroy(t_data *data);
 int		ft_join_threads(t_data *data);
 int		ft_destroy_mutexes(t_data *data);
+int		ft_delete_forks(t_data *data);
 
 #endif
