@@ -5,3 +5,4 @@ a.out
 philo/*.dSYM*
 *.o
 philo/objs
+philo/philo
