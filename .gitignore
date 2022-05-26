@@ -3,4 +3,5 @@
 a.out
 .*
 philo/*.dSYM*
+*.o
 philo/objs
