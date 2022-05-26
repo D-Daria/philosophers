@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:06:33 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/18 19:40:07 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:56:08 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,8 @@ int	main(int argc, char *argv[])
 		ft_free(&data);
 		return (ft_error_msg("Initialization failed"));
 	}
-	// if (ft_philo(&data) == RTRN_ERROR)
-	// {
-	// 	ft_free(&data);
-	// 	return (ft_error_msg("Error in threads"));
-	// }
-	ft_philo(&data);
+	if (ft_philo(&data) == RTRN_ERROR)
+		ft_error_msg("Error in threads");
 	ft_free(&data);
 	return (RTRN_SUCCESS);
 }

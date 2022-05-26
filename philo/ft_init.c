@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 22:06:29 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/23 22:46:47 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 18:16:45 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ static int	ft_init_forks(t_data *data)
 {
 	int i;
 	
-	data->forks = malloc(sizeof(t_forks) * data->philo_count);
-	if (data->forks == NULL)
+	data->forks_mutex = malloc(sizeof(t_mutex) * data->philo_count);
+	if (data->forks_mutex == NULL)
 		return (RTRN_ERROR);
 	i = -1;
 	while (++i < data->philo_count)
 	{
-		data->forks[i].fork_num = i + 1;
-		if (pthread_mutex_init(&(data->forks[i].f_mutex), NULL))
+		if (pthread_mutex_init(&(data->forks_mutex[i]), NULL))
 			return (RTRN_ERROR);
 	}
 	return (RTRN_SUCCESS);
@@ -56,10 +55,9 @@ int	ft_init(t_data *data)
 	{
 		data->philo[i].philo_num = i + 1;
 		data->philo[i].eat_count = 0;
-		data->philo[i].is_dead = 0;
 		data->philo[i].done_eating = 0;
-		data->philo[i].left_fork = &(data->forks[i]);
-		data->philo[i].right_fork = &(data->forks[(i + 1) % data->philo_count]);
+		data->philo[i].l_fork = i;
+		data->philo[i].r_fork = (i + 1) % data->philo_count;
 		if (pthread_mutex_init(&(data->philo[i].dead_mutex), NULL))
 			return (RTRN_ERROR);
 		if (pthread_mutex_init(&(data->philo[i].eat_mutex), NULL))
