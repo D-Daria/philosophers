@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 12:31:20 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/26 20:52:31 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 21:32:28 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	ft_eat_count(t_philo *ph)
 	}
 	return (0);
 }
-
 
 void	*ft_stop_data(void *arg)
 {
@@ -103,9 +102,9 @@ void	*ft_act(void *arg)
 		usleep(100);
 	while (!ft_is_stop(data, 'e'))
 	{
-		ft_eating(philo);
 		if (ft_is_stop(data, 'd'))
 			break ;
+		ft_eating(philo);
 		ft_sleeping(philo);
 		ft_thinking(philo);
 	}
