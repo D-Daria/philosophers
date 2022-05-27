@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:29:49 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/26 19:35:16 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:39:33 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_eating(t_philo *philo)
 	d = philo->data;
 	pthread_mutex_lock(&(d->forks_mutex[philo->l_fork]));
 	ft_print(philo, TOOK_FORK);
-	if (philo->l_fork == philo->r_fork)
+	if (philo->l_fork == philo->r_fork || ft_is_stop(d, 'd'))
 	{
 		pthread_mutex_unlock(&(d->forks_mutex[philo->l_fork]));
 		usleep(philo->data->time_to_die * 1000);

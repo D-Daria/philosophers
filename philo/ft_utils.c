@@ -6,18 +6,11 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:05:22 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/26 20:34:22 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:27:00 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
 
 long	ft_get_time(char type)
 {
@@ -42,7 +35,7 @@ long	ft_get_time(char type)
 void	ft_usleep(t_data *data, long time)
 {
 	long	timestamp;
-	
+
 	timestamp = ft_get_time('l');
 	while (!ft_is_stop(data, 'd'))
 	{

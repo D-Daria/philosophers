@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 19:42:03 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/26 18:20:47 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 22:33:28 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_join_threads(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->philo_count)
@@ -23,17 +23,14 @@ int	ft_join_threads(t_data *data)
 			return (RTRN_ERROR);
 		i++;
 	}
-	if (data->all_dead || data->all_have_eaten)
-	{
-		if (pthread_join(data->stop_th, NULL))
-			return (RTRN_ERROR);
-	}
+	if (pthread_join(data->stop_th, NULL))
+		return (RTRN_ERROR);
 	return (RTRN_SUCCESS);
 }
 
 int	ft_destroy_mutexes(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < data->philo_count)

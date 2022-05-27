@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 22:06:29 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/26 18:16:45 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 22:33:04 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_init_forks(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	data->forks_mutex = malloc(sizeof(t_mutex) * data->philo_count);
 	if (data->forks_mutex == NULL)
 		return (RTRN_ERROR);
@@ -41,8 +41,8 @@ int	ft_init_mutexes(t_data *data)
 
 int	ft_init(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	if (ft_init_mutexes(data) == RTRN_ERROR)
 		return (RTRN_ERROR);
 	if (ft_init_forks(data) == RTRN_ERROR)
