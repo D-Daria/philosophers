@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 16:26:23 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/18 15:58:21 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 22:33:45 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_validate_args(int argc, char **argv)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (++i < argc)

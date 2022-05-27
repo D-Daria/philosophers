@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 19:42:03 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/22 23:27:22 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/26 22:33:28 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,39 @@
 
 int	ft_join_threads(t_data *data)
 {
-	int i;
+	int	i;
 
-	i = -1;
-	while (++i < data->philo_count)
+	i = 0;
+	while (i < data->philo_count)
 	{
 		if (pthread_join(data->philo[i].thread, NULL))
 			return (RTRN_ERROR);
+		i++;
 	}
-	// if (pthread_join(data->check_death_th, NULL))
-	// 	return (RTRN_ERROR);
+	if (pthread_join(data->stop_th, NULL))
+		return (RTRN_ERROR);
 	return (RTRN_SUCCESS);
 }
 
 int	ft_destroy_mutexes(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < data->philo_count)
 	{
-		if (pthread_mutex_destroy(&(data->forks[i].f_mutex)))
+		if (pthread_mutex_destroy(&(data->philo[i].dead_mutex)))
 			return (RTRN_ERROR);
-		if (pthread_mutex_destroy(&(data->philo[i].state_mutex)))
+		if (pthread_mutex_destroy(&(data->philo[i].eat_mutex)))
 			return (RTRN_ERROR);
-		if (pthread_mutex_destroy(&(data->philo[i].is_dead_mutex)))
+		if (pthread_mutex_destroy(&data->forks_mutex[i]))
 			return (RTRN_ERROR);
 	}
-	if (pthread_mutex_destroy(&(data->have_eaten_mutex)))
-		return (RTRN_ERROR);
-	if (pthread_mutex_destroy(&(data->all_dead_mutex)))
+	if (pthread_mutex_destroy(&(data->all_ate_mutex)))
 		return (RTRN_ERROR);
 	if (pthread_mutex_destroy(&(data->printf_mutex)))
 		return (RTRN_ERROR);
-	if (pthread_mutex_destroy(&(data->check_mutex)))
+	if (pthread_mutex_destroy(&(data->all_dead_mutex)))
 		return (RTRN_ERROR);
 	return (RTRN_SUCCESS);
 }

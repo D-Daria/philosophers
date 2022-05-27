@@ -6,39 +6,11 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:05:22 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/18 16:02:39 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:27:00 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-/*time in milliseconds*/
-// long	ft_get_time_ms(long *current_time)
-// {
-// 	t_timeval	time;
-
-// 	gettimeofday(&time, NULL);
-// 	*current_time = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-// 	return (*current_time);
-// }
-
-/*time in microseconds*/
-// long	ft_get_time_mcs(void)
-// {
-// 	t_timeval	time;
-// 	long		current_time;
-
-// 	gettimeofday(&time, NULL);
-// 	current_time = (time.tv_sec * 1000000) + time.tv_usec;
-// 	return (current_time);
-// }
 
 long	ft_get_time(char type)
 {
@@ -60,16 +32,16 @@ long	ft_get_time(char type)
 	return (0);
 }
 
-void	ft_usleep(long time)
+void	ft_usleep(t_data *data, long time)
 {
 	long	timestamp;
-	
+
 	timestamp = ft_get_time('l');
-	while (1)
+	while (!ft_is_stop(data, 'd'))
 	{
 		if (ft_get_time('l') - timestamp >= time)
 			break ;
-		usleep(10);
+		usleep(100);
 	}
 }
 
@@ -77,8 +49,8 @@ void	ft_free(t_data *data)
 {
 	if (data->philo != NULL)
 		free(data->philo);
-	if (data->forks != NULL)
-		free(data->forks);
+	if (data->forks_mutex != NULL)
+		free(data->forks_mutex);
 }
 
 long	ft_atol(const char *str)
