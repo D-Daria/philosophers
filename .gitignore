@@ -3,7 +3,10 @@
 a.out
 .*
 philo/*.dSYM*
+philo_bonus/*.dSYM
 *.o
 philo/philo
 philo/objs
+philo_bonus/philo_bonus
+philo_bonus/objs_bonus
 *.sh
