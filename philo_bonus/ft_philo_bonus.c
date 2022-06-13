@@ -55,6 +55,7 @@ void	*ft_stop(void *arg)
 			exit(ALL_DEAD);
 		}
 		sem_post(philo->philo_sem);
+		usleep(100);
 	}
 	return (NULL);
 }
