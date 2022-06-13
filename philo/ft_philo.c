@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 12:31:20 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/05/27 18:30:24 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:13:35 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	*ft_stop_data(void *arg)
 		{
 			ft_eat_count(&d->philo[i]);
 			pthread_mutex_lock(&(d->philo[i].dead_mutex));
-			if (ft_get_time('l') - d->philo[i].tm_last_eating > d->time_to_die)
+			if (ft_get_time('l') - d->philo[i].tm_last_eating >= d->time_to_die)
 			{
 				ft_print(&(d->philo[i]), DIED_MSG);
 				pthread_mutex_lock(&(d->all_dead_mutex));
@@ -81,6 +81,7 @@ void	*ft_stop_data(void *arg)
 			}
 			pthread_mutex_unlock(&(d->philo[i].dead_mutex));
 		}
+		usleep(100);
 	}
 	return (NULL);
 }
