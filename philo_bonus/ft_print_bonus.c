@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:43:42 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/10 23:00:19 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:36:12 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_print(t_philo *philo, const char *msg)
 	{
 		d = philo->data;
 		sem_wait(d->print_sem);
-		tm = ft_get_time('l') - philo->data->start_time;
+		tm = ft_get_time() - philo->data->start_time;
 		printf("%ld %d %s\n", tm, philo->philo_num, msg);
 		sem_post(d->print_sem);
 	}

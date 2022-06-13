@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:30:42 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/12 16:58:44 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:54:02 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char *argv[])
 	}
 	setbuf(stdout, NULL);
 	ft_philo(&data);
-	ft_free(&data);
+	if (data.philo != NULL)
+		free(data.philo);
 	return (RTRN_SUCCESS);
 }

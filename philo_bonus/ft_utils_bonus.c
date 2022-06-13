@@ -6,17 +6,11 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:36:30 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 12:27:15 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:57:05 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-void	ft_free(t_data *d)
-{
-	if (d->philo != NULL)
-		free(d->philo);
-}
 
 void	ft_close_sems(t_data *data)
 {
@@ -32,48 +26,24 @@ void	ft_close_sems(t_data *data)
 		sem_close(data->philo[i].philo_sem);
 }
 
-long	ft_get_time(char type)
+long	ft_get_time(void)
 {
 	t_timeval	time;
 	long		current_time;
 
-	if (type == 'c')
-	{
-		gettimeofday(&time, NULL);
-		current_time = (time.tv_sec * 1000000) + time.tv_usec;
-		return (current_time);
-	}
-	else if (type == 'l')
-	{
-		gettimeofday(&time, NULL);
-		current_time = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-		return (current_time);
-	}
-	return (0);
+	gettimeofday(&time, NULL);
+	current_time = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (current_time);
 }
 
-int	ft_is_stop(t_philo *philo)
+void	ft_usleep(long time)
 {
-	sem_wait(philo->philo_sem);
-	if (philo->done)
-	{
-		sem_post(philo->philo_sem);
-		return (1);
-	}
-	sem_post(philo->philo_sem);
-	return (0);
-}
-
-void	ft_usleep(t_philo *philo, long time)
-{
-	t_data	*data;
 	long	timestamp;
 
-	data = philo->data;
-	timestamp = ft_get_time('l');
+	timestamp = ft_get_time();
 	while (1)
 	{
-		if (ft_get_time('l') - timestamp >= time)
+		if (ft_get_time() - timestamp >= time)
 			break ;
 		usleep(100);
 	}

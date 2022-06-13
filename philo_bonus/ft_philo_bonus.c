@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:45:10 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 12:26:24 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:52:03 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,30 @@ int	ft_wait_exit(t_data *data)
 
 void	*ft_stop(void *arg)
 {
-	t_philo *philo;
-	long	tm;
+	t_philo		*philo;
+	long		tm;
+	t_timeval	time;
 
 	philo = (t_philo *)arg;
+	usleep(1000);
 	while (1)
 	{
-		sem_wait(philo->philo_sem);
-		if (ft_get_time('l') - philo->tm_last_eating >= philo->data->time_to_die)
+		gettimeofday(&time, 0);
+		tm = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+		if (tm - ((philo->last_eat.tv_sec * 1000) \
+					+ (philo->last_eat.tv_usec / 1000)) \
+					>= philo->data->time_to_die)
 		{
 			sem_wait(philo->data->print_sem);
-			tm = ft_get_time('l') - philo->data->start_time;
+			tm = ft_get_time() - philo->data->start_time;
 			printf("%ld %d %s\n", tm, philo->philo_num, DIED_MSG);
 			sem_post(philo->data->dead_sem);
-			sem_post(philo->philo_sem);
 			exit(ALL_DEAD);
 		}
-		sem_post(philo->philo_sem);
+		usleep(100);
 	}
 	return (NULL);
 }
-
 
 void	ft_process(t_philo *philo)
 {
@@ -66,7 +69,7 @@ void	ft_process(t_philo *philo)
 	t_data		*data;
 
 	data = philo->data;
-	philo->tm_last_eating = ft_get_time('l');
+	gettimeofday(&philo->last_eat, 0);
 	if (pthread_create(&th, NULL, &ft_stop, philo))
 	{
 		sem_post(philo->data->dead_sem);
@@ -109,7 +112,7 @@ int	ft_philo(t_data *data)
 
 	data->all_dead = 0;
 	data->all_have_eaten = 0;
-	data->start_time = ft_get_time('l');
+	data->start_time = ft_get_time();
 	i = -1;
 	while (++i < data->philo_count)
 	{

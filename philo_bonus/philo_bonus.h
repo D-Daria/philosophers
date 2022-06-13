@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:30:52 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/10 21:59:59 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:56:57 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_philo {
 	int			done_eating;
 	int			is_dead;
 	int			done;
-	long		tm_last_eating;
+	t_timeval	last_eat;
 	sem_t		*philo_sem;
 	pthread_mutex_t mtx;
 	pid_t		pid;
@@ -90,9 +90,8 @@ typedef struct s_data {
 
 /*ft_utils_bonus.c*/
 long	ft_atol(const char *str);
-long	ft_get_time(char type);
-void	ft_usleep(t_philo *philo, long time);
-void	ft_free(t_data *d);
+long	ft_get_time(void);
+void	ft_usleep(long time);
 void	ft_close_sems(t_data *data);
 
 /*ft_parse_input_bonus.c*/
