@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:45:10 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 17:04:04 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:26:57 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,28 @@ void	*ft_stop(void *arg)
 {
 	t_philo		*philo;
 	long		tm;
-	t_timeval	time;
+	// t_timeval	time;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		gettimeofday(&time, 0);
-		tm = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-		if (tm - ((philo->last_eat.tv_sec * 1000) \
-					+ (philo->last_eat.tv_usec / 1000)) \
-					>= philo->data->time_to_die)
+		// gettimeofday(&time, 0);
+		// tm = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+		// if (tm - ((philo->last_eat.tv_sec * 1000) \
+		// 			+ (philo->last_eat.tv_usec / 1000)) \
+		// 			>= philo->data->time_to_die)
+		sem_wait(philo->philo_sem);
+		if (ft_get_time() - philo->tm_last_eating >= philo->data->time_to_die)
 		{
 			sem_wait(philo->data->print_sem);
 			tm = ft_get_time() - philo->data->start_time;
 			printf("%ld %d %s\n", tm, philo->philo_num, DIED_MSG);
+			sem_post(philo->philo_sem);
 			sem_post(philo->data->dead_sem);
 			exit(ALL_DEAD);
 		}
-		usleep(100);
+		sem_post(philo->philo_sem);
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -68,7 +72,8 @@ void	ft_process(t_philo *philo)
 	t_data		*data;
 
 	data = philo->data;
-	gettimeofday(&philo->last_eat, 0);
+	// gettimeofday(&philo->last_eat, 0);
+	philo->tm_last_eating = ft_get_time();
 	if (pthread_create(&th, NULL, &ft_stop, philo))
 	{
 		sem_post(data->dead_sem);
@@ -76,7 +81,7 @@ void	ft_process(t_philo *philo)
 	}
 	pthread_detach(th);
 	if (philo->philo_num % 2 == 0)
-		usleep(1000);
+		usleep(data->time_to_eat);
 	while (1)
 	{
 		ft_eating(philo);
@@ -102,6 +107,7 @@ void	*ft_all_ate(void *arg)
 			sem_post(data->control_sem);
 			return (NULL);
 		}
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -111,8 +117,6 @@ int	ft_philo(t_data *data)
 	pthread_t	eating_th;
 	int			i;
 
-	data->all_dead = 0;
-	data->all_have_eaten = 0;
 	data->start_time = ft_get_time();
 	i = -1;
 	while (++i < data->philo_count)

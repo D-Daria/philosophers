@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:30:52 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 14:56:57 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:22:19 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_philo {
 	int			done_eating;
 	int			is_dead;
 	int			done;
+	long		tm_last_eating;
 	t_timeval	last_eat;
 	sem_t		*philo_sem;
 	pthread_mutex_t mtx;
