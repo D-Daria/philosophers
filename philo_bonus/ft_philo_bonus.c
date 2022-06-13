@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:45:10 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 18:26:57 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:08:39 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,10 @@ void	*ft_stop(void *arg)
 {
 	t_philo		*philo;
 	long		tm;
-	// t_timeval	time;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		// gettimeofday(&time, 0);
-		// tm = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-		// if (tm - ((philo->last_eat.tv_sec * 1000) \
-		// 			+ (philo->last_eat.tv_usec / 1000)) \
-		// 			>= philo->data->time_to_die)
 		sem_wait(philo->philo_sem);
 		if (ft_get_time() - philo->tm_last_eating >= philo->data->time_to_die)
 		{
@@ -61,7 +55,7 @@ void	*ft_stop(void *arg)
 			exit(ALL_DEAD);
 		}
 		sem_post(philo->philo_sem);
-		usleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -72,7 +66,6 @@ void	ft_process(t_philo *philo)
 	t_data		*data;
 
 	data = philo->data;
-	// gettimeofday(&philo->last_eat, 0);
 	philo->tm_last_eating = ft_get_time();
 	if (pthread_create(&th, NULL, &ft_stop, philo))
 	{
@@ -107,7 +100,7 @@ void	*ft_all_ate(void *arg)
 			sem_post(data->control_sem);
 			return (NULL);
 		}
-		usleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }

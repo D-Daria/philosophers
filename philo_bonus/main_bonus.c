@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:30:42 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 14:54:02 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:10:06 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char *argv[])
 		ft_error_msg("Initialization error");
 		return (ERROR);
 	}
-	setbuf(stdout, NULL);
+	// setbuf(stdout, NULL);
 	ft_philo(&data);
 	if (data.philo != NULL)
 		free(data.philo);
