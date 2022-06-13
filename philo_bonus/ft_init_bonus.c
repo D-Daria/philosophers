@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:17:30 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 12:24:24 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:30:21 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,13 @@ static int	ft_init_sems(t_data *d)
 	if (d->all_ate_sem == SEM_FAILED)
 		return (ERROR);
 	d->print_sem = sem_open(PRINT_SEM_NAME, O_CREAT, 0666, 1);
-	if (d->forks_sem == SEM_FAILED)
+	if (d->print_sem == SEM_FAILED)
 		return (ERROR);
 	d->forks_sem = sem_open(FORKS_SEM_NAME, O_CREAT, 0666, d->philo_count);
 	if (d->forks_sem == SEM_FAILED)
 		return (ERROR);
 	return (RTRN_SUCCESS);
 }
-
-
 
 int	ft_init(t_data *data)
 {

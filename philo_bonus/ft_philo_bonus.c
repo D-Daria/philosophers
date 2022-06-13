@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:45:10 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 15:05:23 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:38:10 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_wait_exit(t_data *data)
 		return (RTRN_SUCCESS);
 	}
 	else if (WEXITSTATUS(status) == EXIT_FAILURE)
-		return (ft_error_msg("Error in process\n"));
+		ft_error_msg("Error in process\n");
 	i = -1;
 	while (++i < data->philo_count)
 		kill(data->philo[i].pid, SIGKILL);
@@ -43,7 +43,6 @@ void	*ft_stop(void *arg)
 	t_timeval	time;
 
 	philo = (t_philo *)arg;
-	usleep(1000);
 	while (1)
 	{
 		gettimeofday(&time, 0);
