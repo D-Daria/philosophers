@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:17:30 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 15:30:21 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:23:56 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,11 @@ static int	ft_init_sems(t_data *d)
 	return (RTRN_SUCCESS);
 }
 
-int	ft_init(t_data *data)
+static int	ft_fill_philos(t_data *data, t_philo *ph)
 {
-	t_philo	*ph;
 	int		i;
 	char	*name;
 
-	if (ft_init_sems(data))
-		return (ERROR);
-	ph = malloc(sizeof(t_philo) * data->philo_count);
-	if (ph == NULL)
-		return (ERROR);
 	data->philo = ph;
 	i = -1;
 	while (++i < data->philo_count)
@@ -99,5 +93,19 @@ int	ft_init(t_data *data)
 		free(name);
 		ph[i].data = data;
 	}
+	return (RTRN_SUCCESS);
+}
+
+int	ft_init(t_data *data)
+{
+	t_philo	*ph;
+
+	if (ft_init_sems(data))
+		return (ERROR);
+	ph = malloc(sizeof(t_philo) * data->philo_count);
+	if (ph == NULL)
+		return (ERROR);
+	if (ft_fill_philos(data, ph))
+		return (ERROR);
 	return (RTRN_SUCCESS);
 }

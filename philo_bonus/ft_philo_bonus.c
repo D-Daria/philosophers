@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:45:10 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 19:08:39 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:24:54 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	ft_philo(t_data *data)
 	if (data->must_eat > 0)
 	{
 		if (pthread_create(&eating_th, NULL, &ft_all_ate, data))
-			return(ERROR);
+			return (ERROR);
 		pthread_detach(eating_th);
 	}
 	sem_wait(data->dead_sem);

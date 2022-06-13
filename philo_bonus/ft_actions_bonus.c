@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:00:15 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 18:23:33 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:24:43 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	ft_eating(t_philo *philo)
 	sem_wait(data->forks_sem);
 	ft_print(philo, TOOK_FORK);
 	ft_print(philo, EATING_MSG);
-	// gettimeofday(&philo->last_eat, 0);
 	sem_wait(philo->philo_sem);
 	philo->tm_last_eating = ft_get_time();
 	sem_post(philo->philo_sem);
