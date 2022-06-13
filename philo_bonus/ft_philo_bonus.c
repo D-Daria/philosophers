@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:45:10 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 15:02:24 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:05:23 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_process(t_philo *philo)
 	gettimeofday(&philo->last_eat, 0);
 	if (pthread_create(&th, NULL, &ft_stop, philo))
 	{
-		sem_post(philo->data->dead_sem);
+		sem_post(data->dead_sem);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
