@@ -6,7 +6,7 @@
 /*   By: mrhyhorn <mrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 12:31:20 by mrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/13 19:13:35 by mrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:28:56 by mrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	*ft_act(void *arg)
 	philo = (t_philo *)arg;
 	data = philo->data;
 	if (philo->philo_num % 2 == 0)
-		usleep(100);
+		usleep(philo->data->time_to_eat);
 	while (!ft_is_stop(data, 'd'))
 	{
 		ft_eating(philo);
