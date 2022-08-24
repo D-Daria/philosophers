@@ -91,7 +91,9 @@ Replace ***timestamp_in_ms*** with the current timestamp in milliseconds and ***
 **Bonus part**
 
 > All the forks are put in the middle of the table.
+>
 > They have no states in memory but the number of available forks is represented by a semaphore.
+>
 > Each philosopher should be a process. But the main process should not be a philosopher.
 
 ## 🏁 How to run
