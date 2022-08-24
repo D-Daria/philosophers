@@ -132,7 +132,7 @@ Replace ***timestamp_in_ms*** with the current timestamp in milliseconds and ***
 
 	./philo 105 800 200 200 - shouldn't die
 
-	./philo 4 310 200 200 10 - shouldn die
+	./philo 4 310 200 200 10 - shouldn't die
 
 	./philo 5 800 200 200 7 | grep eating | wc -l
 
