@@ -1,6 +1,6 @@
 # Philosophers
 
-<div align="center">
+<div>
 <span>
 	<img src="https://img.shields.io/badge/language-00599C?logo=C&logoColor=white&style=for-the-badge">
 </span>
@@ -35,8 +35,6 @@ and, of course, while sleeping, they are not eating nor thinking.
 • **When a philosopher has finished eating,** they put their forks back on the table and **start sleeping**. **Once awake, they start thinking again**. The simulation stops when  a philosopher dies of starvation.
     
    `eat → sleep → think`
-
-![philosophers.svg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ff80327d-7245-4e2c-a1b8-266e554255f1/philosophers.svg)
 
 - Every philosopher needs to eat and should never starve.
 - Philosophers don’t speak with each other.
