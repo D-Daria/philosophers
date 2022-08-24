@@ -109,10 +109,11 @@ Replace ***timestamp_in_ms*** with the current timestamp in milliseconds and ***
 <details>
 <div style="height: 10px"></div>
 <summary>🔗 References</summary>
+<div style="height: 10px"></div>
 
-[Philosophers visualizer](https://github.com/nafuka11/philosophers-visualizer)
+- [Philosophers visualizer](https://github.com/nafuka11/philosophers-visualizer)
 
-[ywake/Philosophers](https://github.com/ywake/Philosophers)
+- [ywake/Philosophers](https://github.com/ywake/Philosophers)
 
 </details>
 
