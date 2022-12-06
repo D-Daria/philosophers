@@ -104,6 +104,8 @@ Replace ***timestamp_in_ms*** with the current timestamp in milliseconds and ***
 
 	./philo_bonus 5 800 200 200
 
+<img src="repo_info/philo_example.gif" width=600>
+
 ## 🛠 Tests
 
 <details>
